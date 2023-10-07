@@ -1,0 +1,59 @@
+.sidebar {
+    width: 200px;
+    height: 100vh;
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar li {
+    padding: 10px 20px;
+}
+
+.sidebar li a {
+    color: white;
+    text-decoration: none;
+}
+
+.content {
+    margin-left: 220px;
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+}
+
+th,
+td {
+    padding: 8px 12px;
+    text-align: left;
+}
+
+canvas {
+    width: 50%;
+    height: 800px;
+    max-width: 100%;
+}
+
+#parsedOutputChart {
+    width: 70%;
+    height: 70%;
+    max-width: 800px;
+    /* Adjust as needed */
+    max-height: 600px;
+    /* Adjust as needed */
+}

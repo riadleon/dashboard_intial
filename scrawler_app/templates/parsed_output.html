@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Parsed Output Table</h2>
+<!-- <p>URL count: {{ counts.url_count }}</p> -->
+<p>Title count: {{ counts.title_count }}</p>
+<p>Favicon count: {{ counts.favicon_count }}</p>
+<p>Locale count: {{ counts.locale_count }}</p>
+<!-- <p>Type count: {{ counts.type_count }}</p> -->
+<p>Names count: {{ counts.names_count }}</p>
+<p>Emails count: {{ counts.emails_count }}</p>
+<p>Phone Numbers count: {{ counts.phone_numbers_count }}</p>
+<p>IP Address count: {{ counts.ip_address_count }}</p>
+<!-- <p>Location count: {{ counts.location_count }}</p>
+<p>Keywords count: {{ counts.keywords_count }}</p> -->
+
+<div class="pagination">
+    <span class="step-links">
+        {% if data.has_previous %}
+        <a href="?page=1">&laquo; first</a>
+        <a href="?page={{ data.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ data.number }} of {{ data.paginator.num_pages }}.
+        </span>
+
+        {% if data.has_next %}
+        <a style="margin: 1%;" href="?page={{ data.next_page_number }}">next</a>
+        <a href="?page={{ data.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+<table>
+    <!-- Table headers -->
+    <thead>
+        <tr>
+            <th>URL</th>
+            <th>Title</th>
+            <th>Favicon</th>
+            <th>Locale</th>
+            <th>Type</th>
+            <th>Names</th>
+            <th>Emails</th>
+            <th>Phone Numbers</th>
+            <th>IP Address</th>
+            <th>Location</th>
+            <th>Keywords</th>
+        </tr>
+    </thead>
+    <!-- Table data -->
+    <tbody>
+        {% for item in data %}
+        <tr>
+            <td>{{ item.url }}</td>
+            <td>{{ item.title }}</td>
+            <td>{{ item.favicon }}</td>
+            <td>{{ item.locale }}</td>
+            <td>{{ item.type }}</td>
+            <td>{{ item.names }}</td>
+            <td>{{ item.emails }}</td>
+            <td>{{ item.phone_numbers }}</td>
+            <td>{{ item.ip_address }}</td>
+            <td>{{ item.location }}</td>
+            <td>{{ item.keywords }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div class="pagination">
+    <span class="step-links">
+        {% if data.has_previous %}
+        <a href="?page=1">&laquo; first</a>
+        <a href="?page={{ data.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ data.number }} of {{ data.paginator.num_pages }}.
+        </span>
+
+        {% if data.has_next %}
+        <a style="margin: 1%;" href="?page={{ data.next_page_number }}">next</a>
+        <a href="?page={{ data.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+{% endblock %}

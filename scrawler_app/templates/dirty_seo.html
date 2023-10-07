@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Dirty SEO Metadata Table</h2>
+
+<!-- Displaying the counts for each field -->
+<div>
+    <strong>Counts:</strong><br>
+    Dirty SEO Metadata: {{ counts.dirty_seo_metadata_count }}<br>
+    Language: {{ counts.language_count }}
+</div>
+
+<form method="post" action="{% url 'move_to_cleanlist' %}">
+    {% csrf_token %}
+    <table>
+        <thead>
+            <tr>
+                <th>Select</th>
+                <th>Dirty SEO Metadata</th>
+                <th>Language</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+            <tr>
+                <td><input type="checkbox" name="keyword_ids" value="{{ item.id }}"></td>
+                <td>{{ item.dirty_seo_metadata }}</td>
+                <td>{{ item.language }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <input class="btn btn-success" type="submit" value="Move to CleanList">
+</form>
+
+<!-- Pagination controls -->
+<div class="pagination">
+    <span class="step-links">
+        {% if data.has_previous %}
+        <a href="?page=1">&laquo; first</a>
+        <a href="?page={{ data.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ data.number }} of {{ data.paginator.num_pages }}.
+        </span>
+
+        {% if data.has_next %}
+        <a style="margin: 1%;" href="?page={{ data.next_page_number }}">next</a>
+        <a href="?page={{ data.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}

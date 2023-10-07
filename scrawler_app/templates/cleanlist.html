@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Clean List Keywords</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Keyword</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for keyword in clean_keywords %}
+        <tr>
+            <td>{{ keyword.id }}</td>
+            <td>{{ keyword.keyword }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

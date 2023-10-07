@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="">
+    <div>
+        <h2>Parsed Output</h2><br><br>
+        <canvas id="parsedOutputChart"></canvas>
+    </div>
+    <!-- <div>
+        <h2>Dirty SEO Metadata</h2>
+        <canvas id="dirtySeoChart"></canvas>
+    </div> -->
+</div>
+
+<!-- Include Chart.js library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Parsing JSON data from the template
+        var parsedOutputCounts = JSON.parse('{{ parsed_output_counts_json|escapejs }}');
+        var dirtySeoCounts = JSON.parse('{{ dirty_seo_counts_json|escapejs }}');
+        var parsedOutputData = {
+            type: 'pie',
+            data: {
+                labels: ['Title', 'Favicon', 'Locale', 'Type', 'Names', 'Emails', 'Phone Numbers', 'IP Address', 'Location', 'Keywords'],
+                datasets: [{
+                    data: [
+
+                        parsedOutputCounts.title,
+                        parsedOutputCounts.favicon,
+                        parsedOutputCounts.locale,
+                        parsedOutputCounts.type,
+                        parsedOutputCounts.names,
+                        parsedOutputCounts.emails,
+                        parsedOutputCounts.phone_numbers,
+                        parsedOutputCounts.ip_address,
+                        parsedOutputCounts.location,
+                        parsedOutputCounts.keywords
+                    ],
+                    backgroundColor: [
+
+                        '#48A9A6',  // Calm Teal
+                        '#D4AC0D',  // Rich Gold
+                        '#3498DB',  // Vivid Blue
+                        '#E74C3C',  // Bright Red
+                        '#F39C12',  // Deep Orange
+                        '#9B59B6',  // Purple
+                        '#229954',  // Forest Green
+                        '#E67E22',  // Pumpkin Color
+                        '#5DADE2',  // Light Blue
+                        '#F5B041'   // Light Orange
+                    ]
+                }]
+            },
+
+        };
+
+        var dirtySeoData = {
+            type: 'pie',
+            data: {
+                labels: ['Metadata', 'Language'],
+                datasets: [{
+                    data: [
+                        dirtySeoCounts.metadata,
+                        dirtySeoCounts.language,
+                    ],
+                    backgroundColor: ['#EC7063', '#5DADE2']
+                }]
+            }
+        };
+
+        var ctxParsedOutput = document.getElementById('parsedOutputChart').getContext('2d');
+        var myParsedOutputChart = new Chart(ctxParsedOutput, parsedOutputData);
+
+        var ctxDirtySeo = document.getElementById('dirtySeoChart').getContext('2d');
+        var myDirtySeoChart = new Chart(ctxDirtySeo, dirtySeoData);
+    });
+</script>
+{% endblock %}
